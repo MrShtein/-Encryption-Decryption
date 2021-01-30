@@ -22,12 +22,10 @@ public class Encryptor {
         char[] charArray = phraseToEncrypt.toCharArray();
         StringBuilder sb = new StringBuilder();
         for (char item : charArray) {
-            if (item == '!') {
-                sb.append('!');
-            } else if (item == ' ') {
-                sb.append(' ');
-            } else {
+            if (Character.isLetter(item)) {
                 sb.append(letters.get(item));
+            } else {
+                sb.append(item);
             }
         }
         return sb.toString();
