@@ -1,29 +1,33 @@
 package encryptdecrypt;
 
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 
 public class Encryptor {
 
-    private HashMap<Character, Character> letters;
+    private final char[] letters;
 
     public Encryptor() {
-        this.letters = addLetters();
+        this.letters = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     }
 
-    public HashMap<Character, Character> addLetters() {
-        HashMap<Character, Character> mapOfLetters = new HashMap<>();
-        for (char start = 'a', stop = 'z'; start <= 'z'; start++, stop--) {
-            mapOfLetters.put(start, stop);
-        }
-        return mapOfLetters;
-    }
+//    public String encryptPhraseWithDigit(String phraseToEncrypt, int digit) {
+//        char[] charArray = phraseToEncrypt.toCharArray();
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < charArray.length; i++) {
+//            char
+//        }
+//    }
 
-    public String encryptPhrase(String phraseToEncrypt) {
+    public String encryptPhraseWithoutDigits(String phraseToEncrypt) {
         char[] charArray = phraseToEncrypt.toCharArray();
         StringBuilder sb = new StringBuilder();
+        int firstLetter = 0;
+        int lastLetter = 25;
         for (char item : charArray) {
             if (Character.isLetter(item)) {
-                sb.append(letters.get(item));
+                int letterNumber = lastLetter - Arrays.binarySearch(letters, item);
+                sb.append(letters[letterNumber]);
             } else {
                 sb.append(item);
             }
