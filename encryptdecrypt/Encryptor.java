@@ -12,17 +12,13 @@ public class Encryptor extends EncryptorDecryptor {
         char[] charArray = phraseToEncrypt.toCharArray();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < charArray.length; i++) {
-            if (!Character.isLetter(charArray[i])) {
-                sb.append(charArray[i]);
+            int letterPositionInArray = Arrays.binarySearch(symbols, charArray[i]);
+            int futurePosition = letterPositionInArray + offset;
+            if (futurePosition > symbols.length - 1) {
+                int currentPosition = futurePosition - symbols.length;
+                sb.append(symbols[currentPosition]);
             } else {
-                int letterPositionInArray = Arrays.binarySearch(symbols, charArray[i]);
-                int futurePosition = letterPositionInArray + offset;
-                if (futurePosition > symbols.length - 1) {
-                    int currentPosition = futurePosition - symbols.length;
-                    sb.append(symbols[currentPosition]);
-                } else {
-                    sb.append(symbols[futurePosition]);
-                }
+                sb.append(symbols[futurePosition]);
             }
         }
         return sb.toString();
