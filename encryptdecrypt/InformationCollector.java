@@ -5,12 +5,16 @@ public class InformationCollector {
     String mode;
     int offset;
     String phrase;
+    String in;
+    String out;
 
 
     public InformationCollector(String[] arguments) {
         mode = "enc";
         offset = 0;
         phrase = "";
+        in = "";
+        out = "";
         parseArguments(arguments);
     }
 
@@ -23,12 +27,13 @@ public class InformationCollector {
                 mode = currentArgument;
             } else if ("-key".equals(argumentTitle)) {
                 offset = Integer.parseInt(currentArgument);
-            } else {
+            } else if ("-data".equals(argumentTitle)) {
                 phrase = currentArgument;
+            } else if ("-in".equals(argumentTitle)) {
+                in = currentArgument;
+            } else {
+                out = currentArgument;
             }
         }
     }
-
-
-
 }

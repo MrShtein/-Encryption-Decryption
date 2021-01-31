@@ -4,13 +4,8 @@ package encryptdecrypt;
 public class Main {
     public static void main(String[] args) {
         InformationCollector collector = new InformationCollector(args);
+        InformationHandler informationHandler = new InformationHandler(collector);
+        informationHandler.handleInformation();
 
-        if ("enc".equals(collector.mode)) {
-            Encryptor encryptor = new Encryptor(collector.phrase, collector.offset);
-            System.out.println(encryptor.encryptPhraseWithDigit());
-        } else {
-            Decryptor decryptor = new Decryptor(collector.phrase, collector.offset);
-            System.out.println(decryptor.decryptPhraseWithDigit());
-        }
     }
 }
