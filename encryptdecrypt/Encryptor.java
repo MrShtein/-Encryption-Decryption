@@ -1,14 +1,11 @@
 package encryptdecrypt;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 
-public class Encryptor {
-
-    private final char[] letters;
+public class Encryptor extends EncryptorDecryptor {
 
     public Encryptor() {
-        this.letters = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        super();
     }
 
     public String encryptPhraseWithDigit(String phraseToEncrypt, int offset) {
@@ -18,13 +15,13 @@ public class Encryptor {
             if (!Character.isLetter(charArray[i])) {
                 sb.append(charArray[i]);
             } else {
-                int letterPositionInArray = Arrays.binarySearch(letters, charArray[i]);
+                int letterPositionInArray = Arrays.binarySearch(symbols, charArray[i]);
                 int futurePosition = letterPositionInArray + offset;
-                if (futurePosition > letters.length - 1) {
-                    int currentPosition = futurePosition - letters.length;
-                    sb.append(letters[currentPosition]);
+                if (futurePosition > symbols.length - 1) {
+                    int currentPosition = futurePosition - symbols.length;
+                    sb.append(symbols[currentPosition]);
                 } else {
-                    sb.append(letters[futurePosition]);
+                    sb.append(symbols[futurePosition]);
                 }
             }
         }
@@ -38,8 +35,8 @@ public class Encryptor {
         int lastLetter = 25;
         for (char item : charArray) {
             if (Character.isLetter(item)) {
-                int letterNumber = lastLetter - Arrays.binarySearch(letters, item);
-                sb.append(letters[letterNumber]);
+                int letterNumber = lastLetter - Arrays.binarySearch(symbols, item);
+                sb.append(symbols[letterNumber]);
             } else {
                 sb.append(item);
             }
