@@ -1,26 +1,34 @@
 package encryptdecrypt;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class InformationCollector {
 
-    private Scanner scanner;
+    String mode;
+    int offset;
+    String phrase;
 
-    public InformationCollector() {
-        this.scanner = new Scanner(System.in);
+
+    public InformationCollector(String[] arguments) {
+        mode = "enc";
+        offset = 0;
+        phrase = "";
+        parseArguments(arguments);
     }
 
-    public String getPhrase() {
-        return scanner.nextLine();
-    }
+    public void parseArguments(String[] arguments) {
+        for (int i = 0; i < arguments.length; i = i + 2) {
+            String argumentTitle = arguments[i];
+            String currentArgument = arguments[i + 1];
 
-    public Integer getOffset() {
-        try {
-            return scanner.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("It needed to write a digit");
-            return null;
+            if ("-mode".equals(argumentTitle)) {
+                mode = currentArgument;
+            } else if ("-key".equals(argumentTitle)) {
+                offset = Integer.parseInt(currentArgument);
+            } else {
+                phrase = currentArgument;
+            }
         }
     }
+
+
+
 }
