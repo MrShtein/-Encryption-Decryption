@@ -3,9 +3,13 @@ package encryptdecrypt;
 public class EncryptorDecryptor {
 
     protected final char[] symbols;
+    protected final String phrase;
+    protected final int offset;
 
-    public EncryptorDecryptor() {
+    public EncryptorDecryptor(String phrase, int offset) {
         this.symbols = addSymbols();
+        this.phrase = phrase;
+        this.offset = offset;
     }
 
     public char[] addSymbols() {

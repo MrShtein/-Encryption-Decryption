@@ -4,12 +4,12 @@ import java.util.Arrays;
 
 public class Encryptor extends EncryptorDecryptor {
 
-    public Encryptor() {
-        super();
+    public Encryptor(String phrase, int offset) {
+        super(phrase, offset);
     }
 
-    public String encryptPhraseWithDigit(String phraseToEncrypt, int offset) {
-        char[] charArray = phraseToEncrypt.toCharArray();
+    public String encryptPhraseWithDigit() {
+        char[] charArray = phrase.toCharArray();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < charArray.length; i++) {
             int letterPositionInArray = Arrays.binarySearch(symbols, charArray[i]);
@@ -24,8 +24,8 @@ public class Encryptor extends EncryptorDecryptor {
         return sb.toString();
     }
 
-    public String encryptPhraseWithoutDigits(String phraseToEncrypt) {
-        char[] charArray = phraseToEncrypt.toCharArray();
+    public String encryptPhraseWithoutDigits() {
+        char[] charArray = phrase.toCharArray();
         StringBuilder sb = new StringBuilder();
         int firstLetter = 0;
         int lastLetter = 25;
@@ -40,9 +40,9 @@ public class Encryptor extends EncryptorDecryptor {
         return sb.toString();
     }
 
-    public void hidePhrase(String phraseToHide) {
-        for (int i = 0; i < phraseToHide.length(); i++) {
-            char currentChar = phraseToHide.charAt(i);
+    public void hidePhrase() {
+        for (int i = 0; i < phrase.length(); i++) {
+            char currentChar = phrase.charAt(i);
             if (Character.isLetter(currentChar)) {
                 System.out.print("#");
             } else {
