@@ -7,5 +7,6 @@ public class Main {
         InformationHandler informationHandler = new InformationHandler(collector);
         informationHandler.handleInformation();
 
+
     }
 }
