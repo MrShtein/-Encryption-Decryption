@@ -7,6 +7,7 @@ public class InformationCollector {
     String phrase;
     String in;
     String out;
+    String alg;
 
 
     public InformationCollector(String[] arguments) {
@@ -15,6 +16,7 @@ public class InformationCollector {
         phrase = "";
         in = "";
         out = "";
+        alg = "shift";
         parseArguments(arguments);
     }
 
@@ -25,6 +27,8 @@ public class InformationCollector {
 
             if ("-mode".equals(argumentTitle)) {
                 mode = currentArgument;
+            } else if ("-alg".equals(argumentTitle)) {
+                   alg = currentArgument;
             } else if ("-key".equals(argumentTitle)) {
                 offset = Integer.parseInt(currentArgument);
             } else if ("-data".equals(argumentTitle)) {

@@ -13,18 +13,17 @@ public class UnicodeEncAlgorithm implements EncryptAlgorithm {
     public UnicodeEncAlgorithm(int offset, String data) {
         this.offset = offset;
         this.data = data;
-        this.symbols = setSymbols();
+        symbols = new char[COUNTOFSYMBOLS];
+        setSymbols();
     }
 
     @Override
-    public char[] setSymbols() {
-        char[] symbols = new char[COUNTOFSYMBOLS];
+    public void setSymbols() {
         int i = 0;
         for (char start = ' '; start <= '~'; start++) {
             symbols[i] = start;
             i++;
         }
-        return symbols;
     }
 
     @Override

@@ -2,13 +2,13 @@ package encryptdecrypt.encrypt;
 
 public class EncryptData {
 
-    private EncryptAlgorithm shiftAlgorithm;
+    private EncryptAlgorithm encryptAlgorithm;
 
-    public void setShiftAlgorithm(EncryptAlgorithm shiftAlgorithm) {
-        this.shiftAlgorithm = shiftAlgorithm;
+    public void setEncryptAlgorithm(EncryptAlgorithm encryptAlgorithm) {
+        this.encryptAlgorithm = encryptAlgorithm;
     }
 
-    public String encryptData() {
-        return this.shiftAlgorithm.encryptData();
+    public String workWithData() {
+        return this.encryptAlgorithm.encryptData();
     }
 }

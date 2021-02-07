@@ -1,5 +1,12 @@
 package encryptdecrypt;
 
+import encryptdecrypt.decrypt.DecryptData;
+import encryptdecrypt.decrypt.ShiftDecryptAlgorithm;
+import encryptdecrypt.decrypt.UnicodeDecryptAlgorithm;
+import encryptdecrypt.encrypt.EncryptData;
+import encryptdecrypt.encrypt.ShiftEncAlgorithm;
+import encryptdecrypt.encrypt.UnicodeEncAlgorithm;
+
 import java.io.*;
 
 public class InformationHandler {
@@ -46,20 +53,31 @@ public class InformationHandler {
     }
 
     public void encryptOrDecryptInformation() {
+        String processedData = null;
+        String strategy = collector.alg;
         if ("enc".equals(collector.mode)) {
-            Encryptor encryptor = new Encryptor(collector.phrase, collector.offset);
-            if (!"".equals(collector.out)) {
-                writeFile(encryptor.encryptPhraseWithDigit());
+            EncryptData encryptData = new EncryptData();
+            if ("shift".equals(strategy)) {
+                encryptData.setEncryptAlgorithm(new ShiftEncAlgorithm(collector.offset, collector.phrase));
             } else {
-                System.out.println(encryptor.encryptPhraseWithDigit());
+                encryptData.setEncryptAlgorithm(new UnicodeEncAlgorithm(collector.offset, collector.phrase));
             }
+            processedData = encryptData.workWithData();
         } else {
-            Decryptor encryptor = new Decryptor(collector.phrase, collector.offset);
-            if (!"".equals(collector.out)) {
-                writeFile(encryptor.decryptPhraseWithDigit());
+            if ("shift".equals(strategy)) {
+                DecryptData decryptData = new DecryptData();
+                decryptData.setDecryptAlgorithm(new ShiftDecryptAlgorithm(collector.offset, collector.phrase));
+                processedData = decryptData.workWithData();
             } else {
-                System.out.println(encryptor.decryptPhraseWithDigit());
+                DecryptData decryptData = new DecryptData();
+                decryptData.setDecryptAlgorithm(new UnicodeDecryptAlgorithm(collector.offset, collector.phrase));
+                processedData = decryptData.workWithData();
             }
+        }
+        if (!"".equals(collector.out)) {
+            writeFile(processedData);
+        } else {
+            System.out.println(processedData);
         }
     }
 
